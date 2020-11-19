@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import ReactQuill from 'react-quill';
 import debounce from '../helpers';
+import BorderColorIcon from '@material-ui/icons/BorderColor';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
@@ -37,6 +38,10 @@ class Editor extends Component {
     await this.setState({ text: val })
     this.update()
   }
+  updateTitle = async (txt) => {
+    await this.setState({ title: txt })
+    this.update()
+  }
   update = debounce(() => {
     this.props.noteUpdate(this.state.id, {
       title: this.state.title,
@@ -45,11 +50,21 @@ class Editor extends Component {
   }, 1500)
 
 
+
   render() {
     const { classes } = this.props
 
     return (
       <div className={classes.editorContainer}>
+        <BorderColorIcon
+          className={classes.editIcon}
+        />
+        <input
+          className={classes.titleInput}
+          placeholder="Note title..."
+          value={this.state.title ? this.state.title : ""}
+          onChange={(e) => this.updateTitle(e.target.value)}
+        />
         <ReactQuill
           value={this.state.text}
           onChange={this.updateBody}

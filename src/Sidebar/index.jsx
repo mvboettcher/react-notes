@@ -16,7 +16,6 @@ class Sidebar extends Component {
   }
 
   newNoteBtnClick = () => {
-    console.log("NEW NOTE BUTTON CLICKED")
     this.setState({
       title: null,
       addingNote: !this.state.addingNote

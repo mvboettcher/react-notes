@@ -24,7 +24,6 @@ class App extends Component {
           data['id'] = _doc.id
           return data
         })
-        console.log(notes)
         this.setState({ notes: notes })
       })
   }
