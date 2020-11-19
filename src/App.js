@@ -1,19 +1,16 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css';
 
 import firebase from 'firebase'
 
-class App extends Component {
-  constructor() {
-    super()
-    this.state = {
-      selectNoteIndex: null,
-      selectedNote: null,
-      notes: null
-    }
-  }
+const App = () => {
+  const [state, setState] = useState({
+    selectNoteIndex: null,
+    selectedNote: null,
+    notes: null
+  })
 
-  componentDidMount() {
+  useEffect(() => {
     firebase
       .firestore()
       .collection('notes')
@@ -24,17 +21,17 @@ class App extends Component {
           return data
         })
         console.log(notes)
-        this.setState({ notes: notes })
+        setState({ notes: notes })
       })
-  }
+  }, [])
 
-  render() {
-    return (
-      <div>
-        React App
-      </div>
-    )
-  }
+  return (
+    <div>
+      <h1>
+        React Notes App
+      </h1>
+    </div>
+  )
 }
 
 export default App;
