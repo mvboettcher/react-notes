@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React, { Component } from 'react'
+import Editor from './Editor'
+import Sidebar from './Sidebar'
 import './App.css';
-
 import firebase from 'firebase'
 
-const App = () => {
-  const [state, setState] = useState({
-    selectNoteIndex: null,
-    selectedNote: null,
-    notes: null
-  })
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      selectedNoteIndex: null,
+      selectedNote: null,
+      notes: null
+    }
+  }
 
-  useEffect(() => {
+  componentDidMount() {
     firebase
       .firestore()
       .collection('notes')
@@ -21,17 +25,22 @@ const App = () => {
           return data
         })
         console.log(notes)
-        setState({ notes: notes })
+        this.setState({ notes: notes })
       })
-  }, [])
+  }
 
-  return (
-    <div>
-      <h1>
-        React Notes App
-      </h1>
-    </div>
-  )
+  render() {
+    const { notes, selectedNoteIndex } = this.state
+    return (
+      <div className='app-container'>
+        <Sidebar
+          notes={notes}
+          selectedNoteIndex={selectedNoteIndex}
+        />
+        <Editor />
+      </div>
+    )
+  }
 }
 
 export default App;
