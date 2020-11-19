@@ -17,16 +17,23 @@ class Sidebar extends Component {
 
   newNoteBtnClick = () => {
     console.log("NEW NOTE BUTTON CLICKED")
-    this.setState({ title: null, addingNote: !this.state.addingNote })
+    this.setState({
+      title: null,
+      addingNote: !this.state.addingNote
+    })
   }
   updateTitle = (txt) => {
     this.setState({ title: txt })
   }
   newNote = () => {
-    console.log(this.state)
+    this.props.newNote(this.state.title)
+    this.setState({
+      addingNote: false,
+      title: null
+    })
   }
-  selectNote = () => console.log("select note")
-  deleteNote = () => console.log("delete note")
+  selectNote = (n, i) => this.props.selectNote(n, i)
+  deleteNote = (note) => this.props.deleteNote(note)
 
   render() {
     const { classes, notes, selectedNoteIndex } = this.props
