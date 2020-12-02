@@ -2,6 +2,7 @@
   "name": "react-notes",
   "version": "0.1.0",
   "main": "public/electron.js",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -59,7 +60,10 @@
   },
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "icon": "public/icons/mac/icon.icns",
+        "name": "React + Electron Notes App"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",

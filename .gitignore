@@ -10,6 +10,8 @@
 
 # production
 /build
+# desktop distribution
+/out
 
 # misc
 .DS_Store
